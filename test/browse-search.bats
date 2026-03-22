@@ -94,9 +94,9 @@ class=\"list-item\"\>\<span\ class=\"muted\"\>\[\</span\>\<span\ class=\"identif
 identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five\</a\>\<br\>  ]]
 }
 
-# -t / --tag / --tags #########################################################
+# --tag / --tags #############################################################
 
-@test "'browse --container -t tag2 --and -t tag3' performs AND search." {
+@test "'browse --container --tag tag2 --and --tag tag3' performs AND search." {
   {
     "${_NB}" init
 
@@ -121,7 +121,7 @@ identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five
       --content "Content #tag2 #tag3 five."
   }
 
-  run "${_NB}" browse --container -t tag2 --and -t tag3
+  run "${_NB}" browse --container --tag tag2 --and --tag tag3
 
   printf "\${status}: '%s'\\n" "${status}"
   printf "\${output}: '%s'\\n" "${output}"
@@ -140,7 +140,7 @@ class=\"list-item\"\>\<span\ class=\"muted\"\>\[\</span\>\<span\ class=\"identif
 identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five\</a\>\<br\>  ]]
 }
 
-@test "'browse --container -t tag2,tag3' performs AND search." {
+@test "'browse --container --tag tag2,tag3' performs AND search." {
   {
     "${_NB}" init
 
@@ -165,7 +165,7 @@ identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five
       --content "Content #tag2 #tag3 five."
   }
 
-  run "${_NB}" browse --container -t tag2,tag3
+  run "${_NB}" browse --container --tag tag2,tag3
 
   printf "\${status}: '%s'\\n" "${status}"
   printf "\${output}: '%s'\\n" "${output}"
@@ -184,7 +184,7 @@ class=\"list-item\"\>\<span\ class=\"muted\"\>\[\</span\>\<span\ class=\"identif
 identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five\</a\>\<br\>  ]]
 }
 
-@test "'browse --container -t tag2 --or -t tag3' performs OR search." {
+@test "'browse --container --tag tag2 --or --tag tag3' performs OR search." {
   {
     "${_NB}" init
 
@@ -209,7 +209,7 @@ identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five
       --content "Content #tag2 #tag3 five."
   }
 
-  run "${_NB}" browse --container -t tag2 --or -t tag3
+  run "${_NB}" browse --container --tag tag2 --or --tag tag3
 
   printf "\${status}: '%s'\\n" "${status}"
   printf "\${output}: '%s'\\n" "${output}"
@@ -230,7 +230,7 @@ identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five
 identifier\"\>home:3\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Three\</a\>\<br\> ]]
 }
 
-@test "'browse --container -t tag2 -t tag3' performs AND search." {
+@test "'browse --container --tag tag2  --tag tag3' performs AND search." {
   {
     "${_NB}" init
 
@@ -255,7 +255,7 @@ identifier\"\>home:3\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Thre
       --content "Content #tag2 #tag3 five."
   }
 
-  run "${_NB}" browse --container -t tag2 -t tag3
+  run "${_NB}" browse --container --tag tag2  --tag tag3
 
   printf "\${status}: '%s'\\n" "${status}"
   printf "\${output}: '%s'\\n" "${output}"
@@ -274,7 +274,7 @@ class=\"list-item\"\>\<span\ class=\"muted\"\>\[\</span\>\<span\ class=\"identif
 identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five\</a\>\<br\>  ]]
 }
 
-@test "'browse --container -t tag1' performs search." {
+@test "'browse --container --tag tag1' performs search." {
   {
     "${_NB}" init
 
@@ -299,7 +299,7 @@ identifier\"\>home:5\</span\>\<span\ class=\"muted\"\>\]\</span\>\ Title\ Five
       --content "Content #tag3 five."
   }
 
-  run "${_NB}" browse --container -t tag1
+  run "${_NB}" browse --container --tag tag1
 
   printf "\${status}: '%s'\\n" "${status}"
   printf "\${output}: '%s'\\n" "${output}"
