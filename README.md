@@ -588,8 +588,8 @@ Example content.
 # search for items tagged with "#tag1"
 nb search --tag tag1
 
-# search for items tagged with "#tag1" AND "#tag2", short options
-nb q -t tag1 -t tag2
+# search for items tagged with "#tag1" AND "#tag2"
+nb q --tag tag1 --tag tag2
 
 # search for items tagged with "#tag1" OR "#tag2", arguments
 nb q \#tag1 --or \#tag2
@@ -1236,7 +1236,7 @@ nb \#tag1 --all
 # list items in the current notebook tagged with "#tag1" AND "#tag2"
 nb \#tag1 "#tag2"
 
-# list items in all notebooks tagged with "#tag2" AND "#tag3", short option
+# list items in all notebooks tagged with "#tag2" AND "#tag3"
 nb --tags tag2,tag3 -a
 ```
 
@@ -2014,7 +2014,7 @@ permission.
 ```bash
 nb search --tag tag1
 
-nb q -t tag1
+nb q --tag tag1
 
 nb q \#tag1
 ```
@@ -2888,7 +2888,7 @@ nb example: "#tag2"
 # list items in all notebooks tagged with "#tag3", long option
 nb --tags tag3 --all
 
-# list items in all notebooks tagged with "#tag3", short option
+# list items in all notebooks tagged with "#tag3"
 nb --tags tag3 -a
 ```
 
@@ -2912,8 +2912,8 @@ Tagged items can be [searched](#-search) with
 # search for items tagged with "#tag1"
 nb search --tag tag1
 
-# search for items tagged with "#tag1", shortcut and short option
-nb q -t tag1
+# search for items tagged with "#tag1", shortcut and option
+nb q --tag tag1
 
 # search for items tagged with "#tag1", shortcut and argument
 nb q \#tag1
@@ -2924,9 +2924,6 @@ nb q "#tag1"
 # search for items tagged with "#tag1" AND "#tag2"
 nb q --tag tag1 --tag tag2
 
-# search for items tagged with "#tag1" AND "#tag2", short options
-nb q -t tag1 -t tag2
-
 # search for items tagged with "#tag1" AND "#tag2", arguments
 nb q \#tag1 \#tag2
 
@@ -2934,7 +2931,7 @@ nb q \#tag1 \#tag2
 nb q --tags tag1,tag2
 
 # search for items tagged with either "#tag1" OR "#tag2", options
-nb q -t tag1 --or -t tag2
+nb q --tag tag1 --or --tag tag2
 
 # search for items tagged with either "#tag1" OR "#tag2", arguments
 nb q \#tag1 --or \#tag2
@@ -2943,13 +2940,13 @@ nb q \#tag1 --or \#tag2
 nb q "#tag1|#tag2"
 
 # search for items tagged with "#tag1" AND "#tag2" AND "#tag3"
-nb q -t tag1 --tags tag2,tag3
+nb q --tag tag1 --tags tag2,tag3
 
 # search for items tagged with "#tag1" OR "#tag2" OR "#tag3"
-nb q -t tag1 --or --tags tag2,tag3
+nb q --tag tag1 --or --tags tag2,tag3
 
 # search for items tagged with "#tag1" OR "#tag2" OR "#tag3"
-nb q \#tag1 --or -t tag2 --or "#tag3"
+nb q \#tag1 --or --tag tag2 --or "#tag3"
 ```
 
 #### Browsing Tags
@@ -2997,8 +2994,8 @@ search: [#tag2               ]
 [example:654] Sample Title
 [example:789] Demo Title
 
-# shortcut alias and short option
-❯ nb b example: -t tag2
+# shortcut alias
+❯ nb b example: --tag tag2
 ❯nb · example
 
 search: [#tag2               ]
@@ -3387,7 +3384,7 @@ search: [example             ]
 [home:654] Sample Title
 [home:789] Demo Title
 
-# using shortcut alias and short option
+# using shortcut alias
 ❯ nb b -q "example"
 ❯nb · home
 
@@ -3399,7 +3396,7 @@ search: [example             ]
 ```
 
 Search for [#tags](#-tagging) with the
-[`-t`](#browse) / [`--tag`](#browse) / [`--tags`](#browse) options:
+[`--tag`](#browse) / [`--tags`](#browse) options:
 
 ```bash
 # open to a list of items tagged with "#tag2" in the current notebook
@@ -3408,17 +3405,17 @@ Search for [#tags](#-tagging) with the
 
 search: [#tag2               ]
 
-[home:654] Sample Title
-[home:789] Demo Title
+[home:654] Sample Title
+[home:789] Demo Title
 
-# using shortcut alias and short option
-❯ nb b -t tag2
+# using shortcut alias
+❯ nb b --tag tag2
 ❯nb · home
 
 search: [#tag2               ]
 
-[home:654] Sample Title
-[home:789] Demo Title
+[home:654] Sample Title
+[home:789] Demo Title
 ```
 
 For more information about search options, see [Search](#-search) and
@@ -3434,12 +3431,11 @@ add the [`nb browse --gui`](#browse) / [`nb b -g`](#browse) option:
 # open the item with id 123 in the "sample" notebook in the system's primary GUI browser
 nb browse sample:123 --gui
 
-# open the folder named "example" in the system's primary GUI browser,
-# short option
+# open the folder named "example" in the system's primary GUI browser
 nb browse example/ -g
 
 # open the current notebook in the system's primary GUI browser,
-# shortcut alias and short option
+# shortcut alias
 nb b -g
 ```
 
@@ -4082,7 +4078,7 @@ nb search "Example" --and "Sample" --not "Demo"
 ```
 
 Search for [#tags](#-tagging) with flexible
-[`nb search --tags [<tags>]`](#search) / [`nb q -t [<tags>]`](#search) options:
+[`nb search --tags [<tags>]`](#search) / [`nb q --tags`](#search) options:
 
 ```bash
 # search for tags in the current notebook
@@ -4094,8 +4090,8 @@ nb sample:q --tags
 # search for items tagged with "#tag1"
 nb search --tag tag1
 
-# search for items tagged with "#tag1", shortcut alias and short option
-nb q -t tag1
+# search for items tagged with "#tag1", shortcut alias and option
+nb q --tag tag1
 
 # search for items tagged with "#tag1", shortcut alias and argument
 nb q \#tag1
@@ -4113,16 +4109,16 @@ nb sample:q --tags tag1,tag2
 nb q --tag tag1 --tag tag2
 
 # search for items in the current notebook tagged with "#tag1" OR "#tag2"
-nb q -t tag1 --or -t tag2
+nb q --tag tag1 --or --tag tag2
 
 # search for items tagged with "#tag1" AND "#tag2" AND "#tag3"
-nb q -t tag1 --tags tag2,tag3
+nb q --tag tag1 --tags tag2,tag3
 
 # search for items tagged with "#tag1" OR "#tag2" OR "#tag3"
-nb q -t tag1 --or --tags tag2,tag3
+nb q --tag tag1 --or --tags tag2,tag3
 
 # search for items tagged with "#tag1" OR "#tag2" OR "#tag3"
-nb q \#tag1 --or -t tag2 --or "#tag3"
+nb q \#tag1 --or --tag tag2 --or "#tag3"
 ```
 
 [`nb search`](#search) leverages Git's powerful built-in
@@ -4570,8 +4566,8 @@ Search for a tag in or across notebooks with
 # search for #tag in the current notebook
 nb q --tag tag
 
-# search for #tag in all notebooks, short options
-nb q -t tag -a
+# search for #tag in all notebooks
+nb q --tag tag -a
 
 # search for #tag in the "example" notebook, argument
 nb q example: "#tag"
@@ -8066,7 +8062,7 @@ Examples:
   nb search "\d\d\d-\d\d\d\d"
 
   # search for tags
-  nb search --tag tag1 -t tag2
+  nb search --tag tag1  --tag tag2
 
   # search the current notebook for "example query"
   nb q "example query"

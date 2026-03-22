@@ -17401,8 +17401,8 @@ _describe_search() {
 $(_color_primary "Usage"):
   ${_ME} search ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
             <query>... [-a | --all] [--and <query>] [--not <query>] [--or <query>]
-            [-l | --list] [--path] [-t <tag1>,<tag2>... | --tag <tag1>,<tag2>...]
-            [-t | --tags] [--type <type> | --<type>] [--utility <name>]
+            [-l | --list] [--path] [--tag <tag1>,<tag2>...]
+            [--tags] [-t <type> | --type <type> | --<type>] [--utility <name>]
 
 $(_color_primary "Options"):
   -a, --all                     Search all unarchived notebooks.
@@ -17412,9 +17412,9 @@ $(_color_primary "Options"):
   --not <query>                 Add a NOT query.
   --or  <query>                 Add an OR query.
   --path                        Print the full path for each matching file.
-  -t, --tag <tag1>,<tag2>...    A comma-separated list of tags.
-  -t, --tags                    List all tags found in the notebook.
-  --type <type>, --<type>       Search items of <type>. <type> can be a file
+  --tag <tag1>,<tag2>...        A comma-separated list of tags.
+  --tags                        List all tags found in the notebook.
+  -t, --type <type>, --<type>   Search items of <type>. <type> can be a file
                                 extension or one of the following types:
                                 archive, audio, book, bookmark, document,
                                 folder, image, note, text, video
@@ -17473,7 +17473,7 @@ $(_color_primary "Examples"):
   ${_ME} search "\d\d\d-\d\d\d\d"
 
   # search for tags
-  ${_ME} search --tag tag1 -t tag2
+  ${_ME} search --tag tag1 --tag tag2
 
   # search the current notebook for "example query"
   ${_ME} q "example query"
@@ -17603,7 +17603,7 @@ _search() {
       -s|--sort)
         _sort=1
         ;;
-      -t|--tag*|--hashtag*)
+      --tag*|--hashtag*)
         if _option_value_is_present "${2:-}"
         then
           IFS=' ' read -ra _option_tags <<< "$(
@@ -17617,13 +17617,16 @@ _search() {
           _search_for_tags=1
         fi
         ;;
-      --*tool|--*utility)
-        _search_utility="$(_option_get_value "${1}" "${2:-}")"
+      --tags)
+        _search_for_tags=1
+        ;;
+      -t|--type)
+        _type="$(_option_get_value "${1}" "${2:-}")"
 
         shift
         ;;
-      --type)
-        _type="$(_option_get_value "${1}" "${2:-}")"
+      --*tool|--*utility)
+        _search_utility="$(_option_get_value "${1}" "${2:-}")"
 
         shift
         ;;
@@ -20158,7 +20161,7 @@ _describe_browse() {
 $(_color_primary "Usage"):
   ${_ME} browse [<notebook>:][<folder-path>/][<id> | <filename> | <title>] [--daemon]
             [-g | --gui] [-n | --notebooks] [-p | --print] [-q | --query <query>]
-            [-s | --serve] [-t <tag> | --tag <tag> | --tags <tag1>,<tag2>...]
+            [-s | --serve] [--tag <tag> | --tags <tag1>,<tag2>...]
   ${_ME} browse add [<notebook>:][<folder-path>/][<filename>]
             [-c <content> | --content <content>] [--tags <tag1>,<tag2>...]
             [-t <title> | --title <title>]
@@ -20182,7 +20185,7 @@ $(_color_primary "Options"):
   -p, --print                  Print to standard output.
   -q, --query <query>          Open to the search results for <query>.
   -s, --serve                  Start the web server. Close with any key.
-  -t, --tag <tag>              Search for a tag.
+  --tag <tag>                  Search for a tag.
   --tags <tag1>,<tag2>...      A comma-separated list of tags.
   -t, --title <title>          Add a title to the new note.
 

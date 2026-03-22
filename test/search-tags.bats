@@ -2,7 +2,7 @@
 
 load test_helper
 
-@test "'search -t tag2/child-2/grandchild-2' and similar exits with status 0 and print matches." {
+@test "'search --tag tag2/child-2/grandchild-2' and similar exits with status 0 and print matches." {
   {
     "${_NB}" init
 
@@ -18,7 +18,7 @@ load test_helper
     "${_NB}" add "File Ten.md"    --content "Content ten. #tag2/child-2"
   }
 
-  run "${_NB}" search -t tag2
+  run "${_NB}" search --tag tag2
 
   printf "\${status}:     '%s'\\n" "${status}"
   printf "\${output}:     '%s'\\n" "${output}"
@@ -71,7 +71,7 @@ load test_helper
 1.*:.*Content\ three.\ tag1\ .*#tag2.*                          ]]
 
 
-  run "${_NB}" search -t tag2/child-2
+  run "${_NB}" search --tag tag2/child-2
 
   printf "\${status}:     '%s'\\n" "${status}"
   printf "\${output}:     '%s'\\n" "${output}"
@@ -107,7 +107,7 @@ load test_helper
 
 }
 
-@test "'search -t tag1/child-1/grandchild-1' exits with status 0 and prints matches." {
+@test "'search --tag tag1/child-1/grandchild-1' exits with status 0 and prints matches." {
   {
     "${_NB}" init
 
@@ -123,7 +123,7 @@ load test_helper
     "${_NB}" add "File Ten.md"    --content "Content ten. #tag2/child-2"
   }
 
-  run "${_NB}" search -t tag1
+  run "${_NB}" search --tag tag1
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -150,7 +150,7 @@ load test_helper
 [[    "${lines[8]}"   =~  \
 1.*:.*Content\ two.\ .*#tag1.*                          ]]
 
-  run "${_NB}" search -t tag1/child-1
+  run "${_NB}" search --tag tag1/child-1
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -165,7 +165,7 @@ load test_helper
 [[    "${lines[2]}"   =~  \
 1.*:.*Content\ #tag2/child-2/grandchild-2\ Seven.\ #tag3/child-3/grandchild-3\ .*#tag1/child-1.*/grandchild-1                           ]]
 
-  run "${_NB}" search -t tag1/child-1/grandchild-1
+  run "${_NB}" search --tag tag1/child-1/grandchild-1
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -181,7 +181,7 @@ load test_helper
 1.*:.*Content\ #tag2/child-2/grandchild-2\ Seven.\ #tag3/child-3/grandchild-3\ .*#tag1/child-1/grandchild-1.*                           ]]
 }
 
-@test "'search -t tag1 --and -t tag2,'#tag3' exits with status 0 and prints matches as an AND query." {
+@test "'search --tag tag1 --and --tag tag2,'#tag3' exits with status 0 and prints matches as an AND query." {
   {
     "${_NB}" init
 
@@ -194,7 +194,7 @@ load test_helper
     "${_NB}" add "File Seven.md"  --content "Content #tag2 Seven. #tag3 #tag1"
   }
 
-  run "${_NB}" search -t tag1 --and -t tag2,'#tag3'
+  run "${_NB}" search --tag tag1 --and --tag tag2,'#tag3'
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -210,7 +210,7 @@ load test_helper
 1.*:.*Content\ .*#tag2.*\ Seven.\ .*#tag3.*\ .*#tag1                      ]]
 }
 
-@test "'search -t tag1 --or -t tag2,'#tag3' exits with status 0 and prints matches as an OR query." {
+@test "'search --tag tag1 --or --tag tag2,'#tag3' exits with status 0 and prints matches as an OR query." {
   {
     "${_NB}" init
 
@@ -223,7 +223,7 @@ load test_helper
     "${_NB}" add "File Seven.md"  --content "Content #tag2 Seven. #tag1"
   }
 
-  run "${_NB}" search -t tag1 --or -t tag2,'#tag3'
+  run "${_NB}" search --tag tag1 --or --tag tag2,'#tag3'
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -269,7 +269,7 @@ load test_helper
 1.*:.*Content\ two.\ .*#tag1                                      ]]
 }
 
-@test "'search -t tag1 --or --tags tag2 exits with status 0 and prints matches as an OR query." {
+@test "'search --tag tag1 --or --tags tag2 exits with status 0 and prints matches as an OR query." {
   {
     "${_NB}" init
 
@@ -281,7 +281,7 @@ load test_helper
     "${_NB}" add "File Six.md"    --content "Content six.   #tag2"
   }
 
-  run "${_NB}" search -t tag1 --or --tags tag2
+  run "${_NB}" search --tag tag1 --or --tags tag2
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
@@ -307,7 +307,7 @@ load test_helper
 1.*:.*Content\ two.\ \ .*#tag1                                ]]
 }
 
-@test "'search -t tag1 -t tag2 exits with status 0 and prints matches as an AND query." {
+@test "'search --tag tag1 --tag tag2 exits with status 0 and prints matches as an AND query." {
   {
     "${_NB}" init
 
@@ -320,7 +320,7 @@ load test_helper
     "${_NB}" add "File Seven.md"  --content "Content #tag2 Seven. #tag1"
   }
 
-  run "${_NB}" search -t tag1 -t tag2
+  run "${_NB}" search --tag tag1 --tag tag2
 
   printf "\${status}:   '%s'\\n" "${status}"
   printf "\${output}:   '%s'\\n" "${output}"
