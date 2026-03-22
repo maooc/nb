@@ -2668,3 +2668,89 @@ HEREDOC
   [[ "${lines[0]}"  =~  one\ example  ]]
   [[ "${lines[0]}"  =~  [*1*]         ]]
 }
+
+# -t short option consistency ################################################
+
+@test "'ls -t' does NOT work as --type alias (removed for consistency with search -t)." {
+  {
+    "${_NB}" init
+
+    "${_NB}" add "File One.md"    --content "Example content one."
+    "${_NB}" add "File Two.pdf"   --content "PDF content"
+    "${_NB}" add "File Three.md"  --content "Example content three."
+  }
+
+  run "${_NB}" ls -t md
+
+  printf "\${status}:     '%s'\\n" "${status}"
+  printf "\${output}:     '%s'\\n" "${output}"
+
+  [[ "${status}"    -eq 0             ]]
+
+  [[ "${output}"   =~  File\ One.md   ]]
+  [[ "${output}"   =~  File\ Two.pdf  ]]
+  [[ "${output}"   =~  File\ Three.md ]]
+}
+
+@test "'ls --type md' works correctly to filter by type." {
+  {
+    "${_NB}" init
+
+    "${_NB}" add "File One.md"    --content "Example content one."
+    "${_NB}" add "File Two.pdf"   --content "PDF content"
+    "${_NB}" add "File Three.md"  --content "Example content three."
+  }
+
+  run "${_NB}" ls --type md
+
+  printf "\${status}:     '%s'\\n" "${status}"
+  printf "\${output}:     '%s'\\n" "${output}"
+
+  [[ "${status}"    -eq 0             ]]
+
+  [[ "${output}"   =~  File\ One.md   ]]
+  [[ "${output}"   =~  File\ Three.md ]]
+  [[ ! "${output}" =~  File\ Two.pdf  ]]
+}
+
+@test "'list -t' does NOT work as --type alias (removed for consistency with search -t)." {
+  {
+    "${_NB}" init
+
+    "${_NB}" add "File One.md"    --content "Example content one."
+    "${_NB}" add "File Two.pdf"   --content "PDF content"
+    "${_NB}" add "File Three.md"  --content "Example content three."
+  }
+
+  run "${_NB}" list -t md
+
+  printf "\${status}:     '%s'\\n" "${status}"
+  printf "\${output}:     '%s'\\n" "${output}"
+
+  [[ "${status}"    -eq 0             ]]
+
+  [[ "${output}"   =~  File\ One.md   ]]
+  [[ "${output}"   =~  File\ Two.pdf  ]]
+  [[ "${output}"   =~  File\ Three.md ]]
+}
+
+@test "'list --type md' works correctly to filter by type." {
+  {
+    "${_NB}" init
+
+    "${_NB}" add "File One.md"    --content "Example content one."
+    "${_NB}" add "File Two.pdf"   --content "PDF content"
+    "${_NB}" add "File Three.md"  --content "Example content three."
+  }
+
+  run "${_NB}" list --type md
+
+  printf "\${status}:     '%s'\\n" "${status}"
+  printf "\${output}:     '%s'\\n" "${output}"
+
+  [[ "${status}"    -eq 0             ]]
+
+  [[ "${output}"   =~  File\ One.md   ]]
+  [[ "${output}"   =~  File\ Three.md ]]
+  [[ ! "${output}" =~  File\ Two.pdf  ]]
+}

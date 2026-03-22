@@ -4551,14 +4551,14 @@ $(_color_primary "Usage"):
           [-f | --folders-first] [-n <limit> | --limit <limit> | --<limit>]
           [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
           [--paths] [-s | --sort] [-r | --reverse] [--tags]
-          [-t <type> | --type <type> | --<type>]
+          [--type <type> | --<type>]
           [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
   ${_ME} ls [-a | --all] [-b | --browse] [-e [<length>] | --excerpt [<length>]]
         [--filenames] [-f | --folders-first] [-g | --gui]
         [-n <limit> | --limit <limit> | --<limit>] [--no-footer] [--no-header]
         [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
         [--paths] [-s | --sort] [-r | --reverse] [--tags]
-        [-t <type> | --type <type> | --<type>]
+        [--type <type> | --<type>]
         [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
   ${_ME} move ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
           ([<notebook>:][<path>] | --reset | --to-bookmark | --to-note |
@@ -5447,7 +5447,7 @@ $(_color_primary "Usage"):
           [-f | --folders-first] [-n <limit> | --limit <limit> | --<limit>]
           [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
           [--paths] [-s | --sort] [-r | --reverse] [--tags]
-          [-t <type> | --type <type> | --<type>]
+          [--type <type> | --<type>]
           [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
 
 $(_color_primary "Options"):
@@ -5465,7 +5465,7 @@ $(_color_primary "Options"):
   -s, --sort                      Order notes by id.
   -r, --reverse                   List items in reverse order.
   --tags                          List tags in the notebook or folder.
-  -t, --type <type>, --<type>     List items of <type>. <type> can be a file
+  --type <type>, --<type>         List items of <type>. <type> can be a file
                                   extension or one of the following types:
                                   archive, audio, book, bookmark, document,
                                   folder, image, note, text, video
@@ -5629,7 +5629,7 @@ _list() {
       --titles)
         : # Do nothing. This is the default behavior.
         ;;
-      -t|--type)
+      --type)
         _type="$(_option_get_value "${1}" "${2:-}")"
 
         shift
@@ -6526,7 +6526,7 @@ $(_color_primary "Usage"):
         [-n <limit> | --limit <limit> | --<limit>] [--no-footer] [--no-header]
         [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
         [--paths] [-s | --sort] [-r | --reverse] [--tags]
-        [-t <type> | --type <type> | --<type>]
+        [--type <type> | --<type>]
         [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
 
 $(_color_primary "Options"):
@@ -6553,7 +6553,7 @@ $(_color_primary "Options"):
   -s, --sort                      Order notes by id.
   -r, --reverse                   List items in reverse order.
   --tags                          List tags in the notebook or folder.
-  -t, --type <type>, --<type>     List items of <type>. <type> can be a file
+  --type <type>, --<type>         List items of <type>. <type> can be a file
                                   extension or one of the following types:
                                   note, book, bookmark, document, archive,
                                   image, video, audio, folder, text
@@ -7041,7 +7041,7 @@ _ls() {
           shift
         fi
         ;;
-      -t|--type)
+      --type)
         _maybe_type="$(_option_get_value "${1}" "${2:-}")"
         _arguments+=("${1}" "${2:-}")
 

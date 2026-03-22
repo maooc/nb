@@ -6149,14 +6149,14 @@ Usage:
           [-f | --folders-first] [-n <limit> | --limit <limit> | --<limit>]
           [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
           [--paths] [-s | --sort] [-r | --reverse] [--tags]
-          [-t <type> | --type <type> | --<type>]
+          [--type <type> | --<type>]
           [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
   nb ls [-a | --all] [-b | --browse] [-e [<length>] | --excerpt [<length>]]
         [--filenames] [-f | --folders-first] [-g | --gui]
         [-n <limit> | --limit <limit> | --<limit>] [--no-footer] [--no-header]
         [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
         [--paths] [-s | --sort] [-r | --reverse] [--tags]
-        [-t <type> | --type <type> | --<type>]
+        [--type <type> | --<type>]
         [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
   nb move ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
           ([<notebook>:][<path>] | --reset | --to-bookmark | --to-note |
@@ -7384,7 +7384,7 @@ Usage:
           [-f | --folders-first] [-n <limit> | --limit <limit> | --<limit>]
           [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
           [--paths] [-s | --sort] [-r | --reverse] [--tags]
-          [-t <type> | --type <type> | --<type>]
+          [--type <type> | --<type>]
           [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
 
 Options:
@@ -7402,7 +7402,7 @@ Options:
   -s, --sort                      Order notes by id.
   -r, --reverse                   List items in reverse order.
   --tags                          List tags in the notebook or folder.
-  -t, --type <type>, --<type>     List items of <type>. <type> can be a file
+  --type <type>, --<type>         List items of <type>. <type> can be a file
                                   extension or one of the following types:
                                   archive, audio, book, bookmark, document,
                                   folder, image, note, text, video
@@ -7463,7 +7463,7 @@ Usage:
         [-n <limit> | --limit <limit> | --<limit>] [--no-footer] [--no-header]
         [--no-id] [--no-indicator] [-p <number> | --page <number>] [--pager]
         [--paths] [-s | --sort] [-r | --reverse] [--tags]
-        [-t <type> | --type <type> | --<type>]
+        [--type <type> | --<type>]
         [<notebook>:][<folder-path>/][<id> | <filename> | <path> | <query>]
 
 Options:
@@ -7490,7 +7490,7 @@ Options:
   -s, --sort                      Order notes by id.
   -r, --reverse                   List items in reverse order.
   --tags                          List tags in the notebook or folder.
-  -t, --type <type>, --<type>     List items of <type>. <type> can be a file
+  --type <type>, --<type>         List items of <type>. <type> can be a file
                                   extension or one of the following types:
                                   archive, audio, book, bookmark, document,
                                   folder, image, note, text, video
