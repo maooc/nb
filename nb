@@ -4503,14 +4503,14 @@ $(_color_primary "Usage"):
               [-f <filename> | --filename <filename>] [--no-request]
               [-q <quote> | --quote <quote>] [--save-source]
               [-r (<url> | <selector>) | --related (<url> | <selector>)]...
-              [-t <tag1>,<tag2>... | --tags <tag1>,<tag2>...] [--title <title>]
+              [-g <tag1>,<tag2>... | --tags <tag1>,<tag2>...] [--title <title>]
   ${_ME} bookmark [list [<list-options>...]]
   ${_ME} bookmark (edit | delete | open | peek | url)
               ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
   ${_ME} bookmark search <query>
   ${_ME} browse [<notebook>:][<folder-path>/][<id> | <filename> | <title>] [--daemon]
             [-g | --gui] [-n | --notebooks] [-p | --print] [-q | --query <query>]
-            [-s | --serve] [-t <tag> | --tag <tag> | --tags <tag1>,<tag2>...]
+            [-s | --serve] [-g <tag> | --tag <tag> | --tags <tag1>,<tag2>...]
   ${_ME} browse add [<notebook>:][<folder-path>/][<filename>]
             [-c <content> | --content <content>] [--tags <tag1>,<tag2>...]
             [-t <title> | --title <title>]
@@ -4592,8 +4592,8 @@ $(_color_primary "Usage"):
   ${_ME} run <command> [<arguments>...]
   ${_ME} search ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
             <query>... [-a | --all] [--and <query>] [--not <query>] [--or <query>]
-            [-l | --list] [--path] [-t <tag1>,<tag2>... | --tag <tag1>,<tag2>...]
-            [-t | --tags] [--type <type> | --<type>] [--utility <name>]
+            [-l | --list] [--path] [-g <tag1>,<tag2>... | --tag <tag1>,<tag2>...]
+            [-g | --tags] [-t <type> | --type <type> | --<type>] [--utility <name>]
   ${_ME} set [<name> [<value>] | <number> [<value>]]
   ${_ME} settings [colors [<number> | themes] | edit | list [--long]]
   ${_ME} settings (get | show | unset) (<name> | <number>)
@@ -13561,7 +13561,7 @@ $(_color_primary "Usage"):
               [-f <filename> | --filename <filename>] [--no-request]
               [-q <quote> | --quote <quote>] [--save-source]
               [-r (<url> | <selector>) | --related (<url> | <selector>)]...
-              [-t <tag1>,<tag2>... | --tags <tag1>,<tag2>...] [--title <title>]
+              [-g <tag1>,<tag2>... | --tags <tag1>,<tag2>...] [--title <title>]
   ${_ME} bookmark list [<list-options>...]
   ${_ME} bookmark (edit | delete | open | peek | url)
               ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
@@ -13584,7 +13584,7 @@ $(_color_primary "Options"):
                                command to save multiple related URLs and
                                selectors.
   --save-source                Save the page source as HTML.
-  -t, --tags <tag1>,<tag2>...  A comma-separated list of tags.
+  -g, --tags <tag1>,<tag2>...  A comma-separated list of tags.
   --title <title>              The bookmark title. When not specified,
                                \`${_ME}\` will use the html <title> tag.
 
@@ -13815,7 +13815,7 @@ _bookmark() {
       --skip*folder*prompt)
         _skip_folder_prompt=1
         ;;
-      -t|--tag*)
+      -g|--tag*)
         _tag_list="$(_option_get_tags "${1}" "${2:-}")"
 
         shift
@@ -17401,8 +17401,8 @@ _describe_search() {
 $(_color_primary "Usage"):
   ${_ME} search ([<notebook>:][<folder-path>/][<id> | <filename> | <title>])
             <query>... [-a | --all] [--and <query>] [--not <query>] [--or <query>]
-            [-l | --list] [--path] [-t <tag1>,<tag2>... | --tag <tag1>,<tag2>...]
-            [-t | --tags] [--type <type> | --<type>] [--utility <name>]
+            [-l | --list] [--path] [-g <tag1>,<tag2>... | --tag <tag1>,<tag2>...]
+            [-g | --tags] [-t <type> | --type <type> | --<type>] [--utility <name>]
 
 $(_color_primary "Options"):
   -a, --all                     Search all unarchived notebooks.
@@ -17412,9 +17412,9 @@ $(_color_primary "Options"):
   --not <query>                 Add a NOT query.
   --or  <query>                 Add an OR query.
   --path                        Print the full path for each matching file.
-  -t, --tag <tag1>,<tag2>...    A comma-separated list of tags.
-  -t, --tags                    List all tags found in the notebook.
-  --type <type>, --<type>       Search items of <type>. <type> can be a file
+  -g, --tag <tag1>,<tag2>...    A comma-separated list of tags.
+  -g, --tags                    List all tags found in the notebook.
+  -t, --type <type>, --<type>   Search items of <type>. <type> can be a file
                                 extension or one of the following types:
                                 archive, audio, book, bookmark, document,
                                 folder, image, note, text, video
@@ -17473,7 +17473,7 @@ $(_color_primary "Examples"):
   ${_ME} search "\d\d\d-\d\d\d\d"
 
   # search for tags
-  ${_ME} search --tag tag1 -t tag2
+  ${_ME} search --tag tag1 -g tag2
 
   # search the current notebook for "example query"
   ${_ME} q "example query"
@@ -17528,7 +17528,7 @@ _search() {
           shift
         fi
 
-        if [[ "${2:-}" =~ (^-t$|^--tag*|^--hashtag*) ]] &&
+        if [[ "${2:-}" =~ (^-g$|^--tag*|^--hashtag*) ]] &&
            _option_value_is_present "${3:-}"
         then
           shift
@@ -17603,7 +17603,7 @@ _search() {
       -s|--sort)
         _sort=1
         ;;
-      -t|--tag*|--hashtag*)
+      -g|--tag*|--hashtag*)
         if _option_value_is_present "${2:-}"
         then
           IFS=' ' read -ra _option_tags <<< "$(
@@ -17622,7 +17622,7 @@ _search() {
 
         shift
         ;;
-      --type)
+      -t|--type)
         _type="$(_option_get_value "${1}" "${2:-}")"
 
         shift
@@ -20158,7 +20158,7 @@ _describe_browse() {
 $(_color_primary "Usage"):
   ${_ME} browse [<notebook>:][<folder-path>/][<id> | <filename> | <title>] [--daemon]
             [-g | --gui] [-n | --notebooks] [-p | --print] [-q | --query <query>]
-            [-s | --serve] [-t <tag> | --tag <tag> | --tags <tag1>,<tag2>...]
+            [-s | --serve] [-g <tag> | --tag <tag> | --tags <tag1>,<tag2>...]
   ${_ME} browse add [<notebook>:][<folder-path>/][<filename>]
             [-c <content> | --content <content>] [--tags <tag1>,<tag2>...]
             [-t <title> | --title <title>]
@@ -20182,7 +20182,7 @@ $(_color_primary "Options"):
   -p, --print                  Print to standard output.
   -q, --query <query>          Open to the search results for <query>.
   -s, --serve                  Start the web server. Close with any key.
-  -t, --tag <tag>              Search for a tag.
+  -g, --tag <tag>              Search for a tag.
   --tags <tag1>,<tag2>...      A comma-separated list of tags.
   -t, --title <title>          Add a title to the new note.
 
@@ -20733,7 +20733,7 @@ HEREDOC
 
           shift
           ;;
-        -t|--tag*)
+        -g|--tag*)
           if _option_value_is_present "${2:-}"
           then
             shift
@@ -22833,7 +22833,7 @@ HEREDOC
         [[ -n "${_search_query:-}" ]] && _search_query="${_search_query:-} "
 
         case "${2:-}" in
-          -t|--tag*)
+          -g|--tag*)
             _search_query+="--and $(_option_get_tags "${2:-}" "${3:-}")"
 
             shift
@@ -22900,7 +22900,7 @@ HEREDOC
         [[ -n "${_search_query:-}" ]] && _search_query="${_search_query:-} "
 
         case "${2:-}" in
-          -t|--tag*)
+          -g|--tag*)
             _search_query+="--or $(_option_get_tags "${2:-}" "${3:-}")"
 
             shift
@@ -22955,7 +22955,7 @@ HEREDOC
       s|serve|-s|--serve*)
         _only_serve=1
         ;;
-      -t|--tag*)
+      -g|--tag*)
         if [[ -n "${_search_query:-}" ]]
         then
           _search_query="${_search_query:-} "

@@ -8072,7 +8072,7 @@ Examples:
   nb search "\d\d\d-\d\d\d\d"
 
   # search for tags
-  nb search --tag tag1 -t tag2
+  nb search --tag tag1 -g tag2
 
   # search the current notebook for "example query"
   nb q "example query"
